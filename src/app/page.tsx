@@ -24,68 +24,143 @@ import { FloatingNav } from "@/components/ui/FloatingNav";
  * Features morphing transitions between sections with fixed background
  */
 export default function Home() {
+  // const sections = [
+  //   {
+  //     id: "hero",
+  //     component: <HeroSection />,
+  //     title: "Welcome to Portfolio",
+  //   },
+  //   {
+  //     id: "stock-management",
+  //     component: <StockManagementSection />,
+  //     title: "Stock Management",
+  //   },
+  //   {
+  //     id: "order-management",
+  //     component: <OrderManagementSection />,
+  //     title: "Order Management",
+  //   },
+  //   {
+  //     id: "credit-control",
+  //     component: <CreditControlSection />,
+  //     title: "Credit Control",
+  //   },
+  //   {
+  //     id: "payment-integration",
+  //     component: <PaymentIntegrationSection />,
+  //     title: "Payment Integration",
+  //   },
+  //   {
+  //     id: "whatsapp-integration",
+  //     component: <WhatsAppIntegrationSection />,
+  //     title: "WhatsApp Integration",
+  //   },
+  //   {
+  //     id: "delivery",
+  //     component: <DeliverySection />,
+  //     title: "Delivery Tracking",
+  //   },
+  //   {
+  //     id: "customer-portal",
+  //     component: <CustomerPortalSection />,
+  //     title: "Customer Portal",
+  //   },
+  //   {
+  //     id: "reporting-compliance",
+  //     component: <ReportingComplianceSection />,
+  //     title: "Reporting & Compliance",
+  //   },
+  //   {
+  //     id: "automated-gate-pass",
+  //     component: <AutomatedGatePassSection />,
+  //     title: "Automated Gate Pass",
+  //   },
+  //   {
+  //     id: "flexible-pricing",
+  //     component: <FlexiblePricingSection />,
+  //     title: "Flexible Pricing",
+  //   },
+  //   {
+  //     id: "customer-satisfaction",
+  //     component: <CustomerSatisfactionSection />,
+  //     title: "Customer Satisfaction",
+  //   },
+  // ];
+
   const sections = [
     {
       id: "hero",
       component: <HeroSection />,
       title: "Welcome to Portfolio",
+      variantType: "standalone",
     },
     {
       id: "stock-management",
       component: <StockManagementSection />,
       title: "Stock Management",
+      variantType: "custom",
     },
     {
       id: "order-management",
       component: <OrderManagementSection />,
       title: "Order Management",
+      variantType: "custom",
     },
     {
       id: "credit-control",
       component: <CreditControlSection />,
       title: "Credit Control",
+      variantType: "custom",
     },
     {
       id: "payment-integration",
       component: <PaymentIntegrationSection />,
       title: "Payment Integration",
+      variantType: "standalone",
     },
     {
       id: "whatsapp-integration",
       component: <WhatsAppIntegrationSection />,
       title: "WhatsApp Integration",
+      variantType: "custom",
     },
     {
       id: "delivery",
       component: <DeliverySection />,
       title: "Delivery Tracking",
+      variantType: "custom",
     },
     {
       id: "customer-portal",
       component: <CustomerPortalSection />,
       title: "Customer Portal",
+      variantType: "custom",
     },
     {
       id: "reporting-compliance",
       component: <ReportingComplianceSection />,
       title: "Reporting & Compliance",
+      variantType: "standalone",
     },
     {
       id: "automated-gate-pass",
       component: <AutomatedGatePassSection />,
       title: "Automated Gate Pass",
+      variantType: "custom",
     },
     {
       id: "flexible-pricing",
       component: <FlexiblePricingSection />,
       title: "Flexible Pricing",
+      variantType: "custom",
     },
     {
       id: "customer-satisfaction",
       component: <CustomerSatisfactionSection />,
       title: "Customer Satisfaction",
+      variantType: "custom",
     },
-  ];
+  ] as const;
 
   return (
     <section className="h-screen">

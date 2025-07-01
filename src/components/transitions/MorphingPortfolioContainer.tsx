@@ -7,10 +7,12 @@ interface Section {
   id: string;
   component: React.ReactNode;
   title: string;
+  variantType: "standalone" | "custom";
 }
 
 interface MorphingPortfolioContainerProps {
-  sections: Section[];
+  // sections: Section[];
+  sections: readonly Section[];
 }
 
 /**
@@ -22,6 +24,7 @@ export const MorphingPortfolioContainer = ({
   sections,
 }: MorphingPortfolioContainerProps) => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+
   const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef(0);
@@ -92,6 +95,49 @@ export const MorphingPortfolioContainer = ({
     };
   }, [sections.length, isTransitioning]);
 
+  const standaloneVariants = {
+    enter: (direction: "up" | "down") => ({
+      opacity: 0,
+      scale: 0.6,
+      rotateX: direction === "down" ? 45 : -45,
+      y: direction === "down" ? 150 : -150,
+    }),
+    center: {
+      opacity: 1,
+      scale: 1,
+      rotateX: 0,
+      y: 0,
+    },
+    exit: (direction: "up" | "down") => ({
+      opacity: 0,
+      scale: 1.4,
+      rotateX: direction === "down" ? -45 : 45,
+      y: direction === "down" ? -150 : 150,
+    }),
+  };
+  
+  const customVariants = {
+    enter: (direction: "up" | "down") => ({
+      opacity: 0,
+      scale: 0.8,
+      rotateX: direction === "down" ? 15 : -15,
+      y: direction === "down" ? 100 : -100,
+    }),
+    center: {
+      opacity: 1,
+      scale: 1,
+      rotateX: 0,
+      y: 0,
+    },
+    exit: (direction: "up" | "down") => ({
+      opacity: 0,
+      scale: 1.2,
+      rotateX: direction === "down" ? -15 : 15,
+      y: direction === "down" ? -100 : 100,
+    }),
+  };
+  
+
   const morphingVariants = {
     enter: (direction: "up" | "down") => ({
       opacity: 0,
@@ -112,6 +158,12 @@ export const MorphingPortfolioContainer = ({
       y: direction === "down" ? -100 : 100,
     }),
   };
+
+  const currentSection = sections[currentSectionIndex];
+  const variantType = currentSection.variantType || "custom"; // default to custom
+  const selectedVariants =
+    variantType === "standalone" ? standaloneVariants : customVariants;
+  
 
   const backgroundVariants = {
     enter: {
@@ -146,7 +198,8 @@ export const MorphingPortfolioContainer = ({
           <motion.div
             key={currentSectionIndex}
             custom={scrollDirection.current}
-            variants={morphingVariants}
+            // variants={morphingVariants}
+            variants={selectedVariants}
             initial="enter"
             animate="center"
             exit="exit"
@@ -158,7 +211,10 @@ export const MorphingPortfolioContainer = ({
               rotateX: { duration: 0.8 },
               y: { duration: 0.8 },
             }}
-            className="absolute inset-0 w-full h-full"
+            className={`absolute inset-0 w-full h-full ${
+              variantType === "standalone" ? "bg-black" : ""
+            }`}
+
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* Remove the wrapper div that was constraining the height */}
